@@ -130,8 +130,7 @@ public class Tool extends Equippable {
 
         return this.name.equals(rhsItem.name)
             && this.material.equals(rhsItem.material) 
-            && this.modifier.equals(rhsItem.modifier)
-            && this.element.equals(rhsItem.element);
+            && this.modifier.equals(rhsItem.modifier);
     }
 
     /**

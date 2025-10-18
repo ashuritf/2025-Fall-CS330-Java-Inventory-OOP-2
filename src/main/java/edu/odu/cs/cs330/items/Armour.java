@@ -30,7 +30,6 @@ public class Armour extends Equippable {
     public Armour()
     {
         super();
-
         this.defense = 0;
     }
 
@@ -42,9 +41,13 @@ public class Armour extends Equippable {
     public Armour(Armour src)
     {
         super(src.name);
+        this.defense = src.defense;
 
         this.durability = src.durability;
-        // Copt the remaining fields (data members)
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modifierLevel = src.modifierLevel;
+        this.element = src.element;
     }
 
     /**
@@ -80,9 +83,12 @@ public class Armour extends Equippable {
     public void read(Scanner snr)
     {
         super.name = snr.next();
-
-        // Use snr.next() and snr.nextInt() to read in values remaining fields
-
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modifierLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
@@ -91,8 +97,7 @@ public class Armour extends Equippable {
     @Override
     public Item clone()
     {
-        // Replace the return
-        return new Armour();
+        return new Armour(this);
     }
 
     /**
@@ -110,9 +115,10 @@ public class Armour extends Equippable {
 
         Armour rhsItem = (Armour) rhs;
 
-        // Replace this return
-        return false;
-
+        return this.name.equals(rhsItem.name)
+            && this.material.equals(rhsItem.material) 
+            && this.modifier.equals(rhsItem.modifier)
+            && this.element.equals(rhsItem.element);
     }
 
     /**
@@ -122,8 +128,11 @@ public class Armour extends Equippable {
     @Override
     public int hashCode()
     {
-        // Replace this return
-        return -1;
+
+        return name.hashCode() 
+            + material.hashCode() 
+            + modifier.hashCode() 
+            + element.hashCode();
     }
 
     /**
@@ -133,10 +142,13 @@ public class Armour extends Equippable {
     public String toString()
     {
         return String.join(
-            System.lineSeparator(),
-            String.format("  Refer to..."),
-            String.format("  ...solution for the..."),
-            String.format("  ...previous assignment"),
+            System.lineSeparator(), 
+            String.format("  Nme: %s", super.getName()),
+            String.format("  Dur: %s", this.getDurability()),
+            String.format("  Def: %s", this.getDefense()),
+            String.format("  Mtl: %s", this.getMaterial()),
+            String.format("  Mdr: %s (Lvl %s)", this.getModifier(), this.getModifierLevel()),
+            String.format("  Emt: %s", this.getElement()),
             ""
         );
     }

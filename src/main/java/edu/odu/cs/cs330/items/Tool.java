@@ -87,7 +87,12 @@ public class Tool extends Equippable {
     @Override
     public void read(Scanner snr)
     {
-        // Complete this method
+        super.name = snr.next();
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.speed = snr.nextInt();
+        this.modifier = snr.next();
+        this.modifierLevel = snr.nextInt();
     }
 
     /**
@@ -123,8 +128,10 @@ public class Tool extends Equippable {
 
         Tool rhsItem = (Tool) rhs;
 
-        // Replace the return
-        return false;
+        return this.name.equals(rhsItem.name)
+            && this.material.equals(rhsItem.material) 
+            && this.modifier.equals(rhsItem.modifier)
+            && this.element.equals(rhsItem.element);
     }
 
     /**
@@ -134,8 +141,9 @@ public class Tool extends Equippable {
     @Override
     public int hashCode()
     {
-        // Replace the return
-        return -1;
+        return name.hashCode() 
+            + material.hashCode() 
+            + modifier.hashCode();
     }
 
     /**
@@ -145,10 +153,12 @@ public class Tool extends Equippable {
     public String toString()
     {
         return String.join(
-            System.lineSeparator(),
-            String.format("  Refer to..."),
-            String.format("  ...solution for the..."),
-            String.format("  ...previous assignment"),
+            System.lineSeparator(), 
+            String.format("  Nme: %s", super.getName()),
+            String.format("  Dur: %s", this.getDurability()),
+            String.format("  Spd: %s", this.getSpeed()),
+            String.format("  Mtl: %s", this.getMaterial()),
+            String.format("  Mdr: %s (Lvl %s)", this.getModifier(), this.getModifierLevel()),
             ""
         );
     }
